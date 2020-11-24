@@ -1,4 +1,4 @@
-package com.musicmanagement.rosscrawford.musicmanagement.datatypes;
+package com.musicmanagement.datatypes;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
