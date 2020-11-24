@@ -1,4 +1,4 @@
-package com.musicmanagement.rosscrawford.musicmanagement;
+package com.musicmanagement;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
