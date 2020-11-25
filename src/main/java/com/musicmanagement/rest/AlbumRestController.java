@@ -20,17 +20,28 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/albums")
+/**
+ * A REST controller for managing the albums via the album service.
+ */
 public class AlbumRestController{
     
     @Autowired
     private AlbumService albumService;
 
-    
+    /**
+     * GET method to retrieve all Albums.
+     * @return list<Albums>.
+     */
     @GetMapping("")
     public List<Album> list() {
         return albumService.listAllAlbums();
     }
 
+    /**
+     * GET method to retrieve a Album via their Id.
+     * @param id the Album's Id.
+     * @return Album.
+     */
     @GetMapping("/{id}")
     public ResponseEntity<Album> get (@PathVariable Integer id) {
         try{
@@ -41,6 +52,10 @@ public class AlbumRestController{
         }
     }
 
+    /**
+     * POST method to add a new Album to the database.
+     * @param album the signer to be added to database.
+     */
     @PostMapping("/")
     public void add(@RequestBody Album album) {
         try{albumService.saveAlbum(album);}
@@ -49,6 +64,12 @@ public class AlbumRestController{
         }
     }
 
+    /**
+     * PUT method to update a album in the database via their Id.
+     * @param album the Album to be updated
+     * @param id the album's Id.
+     * @return
+     */
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@RequestBody Album album, @PathVariable Integer id) {
         try{
@@ -61,6 +82,10 @@ public class AlbumRestController{
         }
     }
 
+    /**
+     * DELETE method to remove a album from the database via their Id.
+     * @param id the album's Id.
+     */
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
         albumService.deleteAlbum(id);

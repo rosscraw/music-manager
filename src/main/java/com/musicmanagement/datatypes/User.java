@@ -18,7 +18,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @Column(name = "username")
     private String username;
@@ -26,6 +26,9 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    public User() {
+
+    }
     /**
      * Primary constructor.
      *
@@ -34,6 +37,21 @@ public class User {
 
     public User(String username) { this.username = username;}
 
+    /**
+     * @return the user's id.
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the user's id.
+     * @return this.
+     */
+    public User setId(int id) {
+        this.id = id;
+        return this;
+    }
 
     /**
      * @return the user's username.

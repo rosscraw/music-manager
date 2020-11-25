@@ -8,8 +8,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.persistence.Id;
+
+
 @Entity
 @Table(name = "album", uniqueConstraints = @UniqueConstraint(columnNames = "title"))
+/**
+ * Data structure to represent an Album.
+ */
 public class Album implements Manageable{
 
     @Id
