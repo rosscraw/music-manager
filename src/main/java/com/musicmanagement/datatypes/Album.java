@@ -53,10 +53,17 @@ public class Album implements Manageable{
         this.singer = singer;
     }
 
+    /**
+     * @return the album's id.
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * @param id the album's id.
+     * @return this.
+     */
     public Album setId(int id) {
         this.id = id;
         return this;

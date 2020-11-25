@@ -1,13 +1,11 @@
 package com.musicmanagement.rest;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 import com.musicmanagement.datatypes.Album;
 import com.musicmanagement.services.AlbumService;
 
-import org.hibernate.DuplicateMappingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,16 +17,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestParam;
-
 
 @RestController
 @RequestMapping("/albums")
-public class AlbumRestController {
+public class AlbumRestController{
     
     @Autowired
     private AlbumService albumService;
 
+    
     @GetMapping("")
     public List<Album> list() {
         return albumService.listAllAlbums();
