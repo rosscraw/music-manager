@@ -14,23 +14,26 @@ import javax.persistence.Id;
 @Table(name = "singer", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 public class Singer implements Manageable{
 
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-@Column(name = "name")
-private String name;
+    @Column(name = "name")
+    private String name;
 
-@Column(name = "sex")
-private String sex;
+    @Column(name = "sex")
+    private String sex;
 
-// Update this to object
-@Column(name = "company")
-private String company;
+    // Update this to object
+    @Column(name = "company")
+    private String company;
 
-@Column(name = "dob")
-private Date dob;
+    @Column(name = "dob")
+    private int dob;
 
+    public Singer() {
+        
+    }
 /**
      * Primary constructor.
      *
@@ -50,11 +53,27 @@ private Date dob;
      * @param dob the singer's date of birth.
      * @param sex the singer's sex..
      */
-    public Singer(String name, String company, Date dob, String sex) {
+    public Singer(String name, String company, int dob, String sex) {
         this.name = name;
         this.company = company;
         this.dob = dob;
         this.sex = sex;
+    }
+
+    /**
+     * @return the singer's id.
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the singer's id.
+     * @return this.
+     */
+    public Singer setId(int id) {
+        this.id = id;
+        return this;
     }
 
     /**
@@ -92,7 +111,7 @@ private Date dob;
     /**
      * @return the singer's date of birth.
      */
-    public Date getDob() {
+    public int getDob() {
         return dob;
     }
 
@@ -100,7 +119,7 @@ private Date dob;
      * @param dob the singer's date of birth.
      * @return this.
      */
-    public Singer setDob(Date dob) {
+    public Singer setDob(int dob) {
         this.dob = dob;
         return this;
     }
