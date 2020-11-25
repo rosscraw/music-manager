@@ -14,7 +14,7 @@ public class Album implements Manageable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @Column(name = "title")
     private String title;
@@ -28,6 +28,7 @@ public class Album implements Manageable{
     @Column(name = "singer")
     private String singer;
 
+    public Album() {}
     /**
      * Primary Constructor
      *
@@ -46,9 +47,19 @@ public class Album implements Manageable{
      * @param singer the {@link Singer} of the album.
      */
     public Album(String title, String company, int year, String singer) {
-        
+        this.title = title;
+        this.company = company;
         this.year = year;
         this.singer = singer;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Album setId(int id) {
+        this.id = id;
+        return this;
     }
 
      /**

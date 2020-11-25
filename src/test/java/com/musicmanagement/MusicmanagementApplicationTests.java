@@ -1,4 +1,4 @@
-package com.musicmanagement.rosscrawford.musicmanagement;
+package com.musicmanagement;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
