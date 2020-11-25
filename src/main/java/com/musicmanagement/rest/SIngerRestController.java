@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -20,17 +21,28 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/singers")
+/**
+ * A REST controller for managing the singers via the singer service.
+ */
 public class SingerRestController{
     
     @Autowired
     private SingerService singerService;
 
-    
+    /**
+     * GET method to retrieve all Singers.
+     * @return list<Singers>.
+     */
     @GetMapping("")
     public List<Singer> list() {
         return singerService.listAllSingers();
     }
 
+    /**
+     * GET method to retrieve a Singer via their Id.
+     * @param id the Singer's Id.
+     * @return Singer.
+     */
     @GetMapping("/{id}")
     public ResponseEntity<Singer> get (@PathVariable Integer id) {
         try{
@@ -41,6 +53,10 @@ public class SingerRestController{
         }
     }
 
+    /**
+     * POST method to add a new Singer to the database.
+     * @param singer the signer to be added to database.
+     */
     @PostMapping("/")
     public void add(@RequestBody Singer singer) {
         try{singerService.saveSinger(singer);}
@@ -49,6 +65,12 @@ public class SingerRestController{
         }
     }
 
+    /**
+     * PUT method to update a singer in the database via their Id.
+     * @param singer the Singer to be updated
+     * @param id the singer's Id.
+     * @return
+     */
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@RequestBody Singer singer, @PathVariable Integer id) {
         try{
@@ -61,6 +83,10 @@ public class SingerRestController{
         }
     }
 
+    /**
+     * DELETE method to remove a singer from the database via their Id.
+     * @param id the singer's Id.
+     */
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
         singerService.deleteSinger(id);

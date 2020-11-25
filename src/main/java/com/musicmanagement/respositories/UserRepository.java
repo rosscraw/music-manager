@@ -1,14 +1,14 @@
 package com.musicmanagement.respositories;
 
-import com.musicmanagement.datatypes.Singer;
+import com.musicmanagement.datatypes.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
 /**
- * Singer repository.
+ * User repository.
  */
-public interface SingerRepository extends JpaRepository<Singer, Integer>{
+public interface UserRepository extends JpaRepository<User, Integer>{
     
 }

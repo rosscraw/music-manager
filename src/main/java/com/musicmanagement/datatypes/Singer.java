@@ -1,7 +1,5 @@
 package com.musicmanagement.datatypes;
 
-import java.sql.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,8 +8,12 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.persistence.Id;
 
+
 @Entity
 @Table(name = "singer", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
+/**
+ * Data structure to represent a music artist.
+ */
 public class Singer implements Manageable{
 
     @Id
@@ -24,7 +26,7 @@ public class Singer implements Manageable{
     @Column(name = "sex")
     private String sex;
 
-    // Update this to object
+    // Update this to object?
     @Column(name = "company")
     private String company;
 
