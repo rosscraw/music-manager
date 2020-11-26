@@ -41,7 +41,10 @@ public class User {
      * @param username the user's username
      */
 
-    public User(String username) { this.username = username;}
+    public User(String username) {
+         this.username = username;
+         role = "ROLE_USER";
+        }
 
     /**
      * @return the user's id.

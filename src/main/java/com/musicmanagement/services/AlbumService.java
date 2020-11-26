@@ -31,7 +31,10 @@ public class AlbumService {
      * @param album the album to be added to database.
      */
     public void saveAlbum(Album album) {
-       albumRepo.save(album);
+       try {albumRepo.save(album);}
+       catch(Exception e) {
+           System.out.println(e);
+       }
     }
 
     /**
