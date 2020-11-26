@@ -14,38 +14,40 @@ import org.springframework.stereotype.Service;
  */
 public class UserService {
 
+    
+
     @Autowired
-    private UserRepository singerRepo;
+    private UserRepository userRepo;
 
     /**
-     * @return list of all singers in the database.
+     * @return list of all users in the database.
      */
     public List<User> listAllUsers() {
-        return singerRepo.findAll();
+        return userRepo.findAll();
     }
 
     /**
-     * Add singer to database.
-     * @param singer the singer to be added to database.
+     * Add user to database.
+     * @param user the user to be added to database.
      */
-    public void saveUser(User singer) {
-       singerRepo.save(singer);
+    public void saveUser(User user) {
+       userRepo.save(user);
     }
 
     /**
-     * @param id the singer's id.
-     * @return the singer.
+     * @param id the user's id.
+     * @return the user.
      */
     public User getUser(Integer id) {
-        return singerRepo.findById(id).get();
+        return userRepo.findById(id).get();
     }
 
     /**
-     * Delete singer from database.
-     * @param id the singer's id.
+     * Delete user from database.
+     * @param id the user's id.
      */
     public void deleteUser(Integer id) {
-        singerRepo.deleteById(id);
+        userRepo.deleteById(id);
     }
     
 }
