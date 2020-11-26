@@ -33,10 +33,14 @@ public class Singer implements Manageable{
     @Column(name = "dob")
     private int dob;
 
+    /**
+     * Default Constructor.
+     */
     public Singer() {
         
     }
-/**
+
+    /**
      * Primary constructor.
      *
      * @param name the singer's name.

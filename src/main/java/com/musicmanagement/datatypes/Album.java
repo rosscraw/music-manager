@@ -33,7 +33,13 @@ public class Album implements Manageable{
     @Column(name = "singer")
     private String singer;
 
-    public Album() {}
+    /**
+     * Default Constructor.
+     */
+    public Album() {
+
+    }
+    
     /**
      * Primary Constructor
      *
