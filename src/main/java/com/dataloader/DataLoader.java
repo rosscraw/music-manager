@@ -1,29 +1,16 @@
 package com.dataloader;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Random;
 import java.util.Scanner;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.musicmanagement.datatypes.Album;
 import com.musicmanagement.datatypes.Singer;
 import com.musicmanagement.datatypes.User;
-import com.musicmanagement.respositories.AlbumRepository;
-import com.musicmanagement.respositories.UserRepository;
-import com.musicmanagement.rest.UserRestController;
-import com.musicmanagement.services.AlbumService;
-import com.musicmanagement.services.SingerService;
-import com.musicmanagement.services.UserService;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
 
 /**
  * Data type to sort through a text file and update database.
+ * Contains the driver to insert the data into MySQL database.
  */
 public class DataLoader {
     
@@ -34,44 +21,17 @@ public class DataLoader {
         DBConnection.createTables();
         File file = new File("data\\ng_music_data.txt");
         dataL.separateDataFromTextFile(file);
-
-        // User user = new User("John13245");
-        // user.setPassword("etryuio");
-        // user.setId(1234354678);
-        // DBConnection.addUser(user);
-        // //dataL.addUserToDB(user);
-
-
     }
 
-    //private DBConnection db = new DBConnection();
-
-    @Autowired
-    private SingerService singerService;
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private AlbumService albumService;
-
-    @Autowired
-    private AlbumRepository albumRepo;
-    @Autowired
-    private UserRepository userRepo;
-
-    @Autowired
-    private UserRestController userRest;
-
-
     /**
-     * Separated the rows in a text file and creates an object depending on its
-     * type.
+     * Separated the rows in a text file and creates an object depending on its type.
      * 
-     * @param file the file containing artist, singer and user records to be
-     *             separated and parsed.
+     * @param file the file containing artist, singer and user records to be separated and parsed.
      * @throws Exception
      */
     public void separateDataFromTextFile(File file) throws Exception {
         Scanner input = new Scanner(file);
+        // Separate input by line.
         input.useDelimiter("\n");
 
         while (input.hasNext()) {
@@ -91,7 +51,6 @@ public class DataLoader {
 
         System.out.print("Complete!");
         input.close();
-
     }
 
     /**
@@ -102,12 +61,8 @@ public class DataLoader {
      * @throws Exception
      */
     public void mapUser(String userRow) throws Exception {
-        String url = "http://localhost:8080/users/";
-        
         String[] params = userRow.trim().split("\\|");
         BCryptPasswordEncoder encode = new BCryptPasswordEncoder();
-
-        //System.out.println(Arrays.toString(params));
 
         String username = params[1].trim();
         String password = params[2].trim();
@@ -116,8 +71,6 @@ public class DataLoader {
         user.setPassword(encode.encode(password));
         
         DBConnection.addUser(user);
-        //addUserToDB(user);
-
     }
 
     /**
@@ -134,12 +87,9 @@ public class DataLoader {
         int year = Integer.parseInt(params[3].trim());        
         String company = params[4].trim();
 
-
         Album album = new Album(title, company, year, singer);
 
         DBConnection.addAlbum(album);
-        // System.out.println(album.toString());
-        // addAlbumToDB(album);
 
     }
 
@@ -158,24 +108,7 @@ public class DataLoader {
         String company = params[4].trim();
 
         Singer singer = new Singer(name, company, dob, sex);
-        // addSingerToDB(singer);
         DBConnection.addSinger(singer);
     }
-
-    
-
-    // public void addSingerToDB(Singer singer) {
-    //     singerService.saveSinger(singer);
-    // }
-
-    // // public void addUserToDB(User user) {
-    // //     userService.saveUser(user);
-    // //     //userRepo.save(user);
-    // //     //userRest.add(user);
-    // // }
-
-    // public void addAlbumToDB(Album album) {
-    //     albumService.saveAlbum(album);
-    // }
 
 }

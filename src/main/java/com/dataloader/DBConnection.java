@@ -13,16 +13,13 @@ import com.musicmanagement.datatypes.User;
  * Class that handles connection and creation of tables for the database.
  */
 public class DBConnection {
+
 private static String dbhost = "jdbc:mysql://localhost:3306/music_manager";
 private static String username = "root";
 private static String password = "Moomper2410!";
 private static Connection conn;
 
-    public static void main(String[] args) throws Exception {
-        createTables();
-        
-    }
-
+    
 
     /**
      * Establish connection to the database.
@@ -55,32 +52,32 @@ private static Connection conn;
                             " username varchar(255)," +
                             " password varchar(255)," +
                             " role varchar(255)," +
-                            " PRIMARY KEY(id))," +
-                            " UNIQUE(username)"
+                            " PRIMARY KEY (id)," +
+                            " UNIQUE (username))"
             );
             createUserTable.executeUpdate();
             // Singer Table
             PreparedStatement createSingerTable = conn.prepareStatement(
                     "CREATE TABLE IF NOT EXISTS singer(" +
                             "id int NOT NULL AUTO_INCREMENT," +
-                            "name varchar(255)," +
-                            "dob int," +
-                            "sex varchar(255)," +
-                            "company varchar(255)," +
-                            "PRIMARY KEY(id))," +
-                            "UNIQUE(name)"
+                            " name varchar(255)," +
+                            " dob int," +
+                            " sex varchar(255)," +
+                            " company varchar(255)," +
+                            " PRIMARY KEY (id)," +
+                            " UNIQUE (name))"
             );
             createSingerTable.executeUpdate();
             //Album Table
             PreparedStatement createAlbumTable = conn.prepareStatement(
                     "CREATE TABLE IF NOT EXISTS album(" +
                             "id int NOT NULL AUTO_INCREMENT," +
-                            "title varchar(255)," +
-                            "year int," +
-                            "singer varchar(255," +
-                            "company varchar(255)," +
-                            "PRIMARY KEY(id))," +
-                            "UNIQUE(title)"
+                            " title varchar(255)," +
+                            " year int," +
+                            " singer varchar(255)," +
+                            " company varchar(255)," +
+                            " PRIMARY KEY (id)," +
+                            " UNIQUE (title))"
             );
             createAlbumTable.executeUpdate();
         }
@@ -92,13 +89,20 @@ private static Connection conn;
         }
     }
 
+    /**
+     * Inserts a User object into the user table.
+     * @param user the user to be inserted.
+     * @throws Exception
+     */
     public static void addUser(User user) throws Exception {    
         
         try{
             Connection conn = getDBConnection();
-            PreparedStatement posted = conn.prepareStatement(
-                    "INSERT INTO user(username, password, role) VALUES ('" + user.getUsername() +"', '"+ user.getPassword() +"', '"+ user.getRole() +"')"
-            );
+            String sql = "INSERT INTO user(username, password, role) VALUES(?, ?, ?)";
+            PreparedStatement posted = conn.prepareStatement(sql);
+            posted.setString(1, user.getUsername());
+            posted.setString(2, user.getPassword());
+            posted.setString(3, user.getRole());
             posted.executeUpdate();
         }
         catch(Exception e) {
@@ -107,14 +111,21 @@ private static Connection conn;
         finally{System.out.println("Insert completed");}
     }
 
-    public static void addAlbum(Album album) throws Exception {    
-        
+    /**
+     * Inserts an album object into the album table
+     * @param album the album to be inserted.
+     * @throws Exception
+     */
+    public static void addAlbum(Album album) throws Exception {                
         try{
             Connection conn = getDBConnection();
-            PreparedStatement posted = conn.prepareStatement(
-                    "INSERT INTO album(title, year, singer, company) VALUES ('" + album.getName() +"', '"+ album.getYear() +"', '"+ album.getSinger() +"', '"+ album.getCompany() +"')"
-            );
-            posted.executeUpdate();
+            String sql = "INSERT INTO album(title, year, singer, company) VALUES (?, ?, ?, ?)"; 
+            PreparedStatement posted = conn.prepareStatement(sql);
+                posted.setString(1, album.getName());
+                posted.setInt(2, album.getYear());
+                posted.setString(3, album.getSinger());
+                posted.setString(4, album.getCompany());
+                posted.executeUpdate();
         }
         catch(Exception e) {
             System.out.println(e);
@@ -122,13 +133,20 @@ private static Connection conn;
         finally{System.out.println("Insert completed");}
     }
 
-    public static void addSinger(Singer singer) throws Exception {    
-        
+    /**
+     * Inserts a singer object into the database.
+     * @param singer the singer to be inserted.
+     * @throws Exception
+     */
+    public static void addSinger(Singer singer) throws Exception {            
         try{
             Connection conn = getDBConnection();
-            PreparedStatement posted = conn.prepareStatement(
-                    "INSERT INTO singer(name, sex, company, dob) VALUES ('" + singer.getName() +"', '"+ singer.getSex() +"', '"+ singer.getCompany() +"', '"+ singer.getDob() +"')"
-            );
+            String sql = "INSERT INTO singer(name, sex, company, dob) VALUES (?, ?, ?, ?)";
+            PreparedStatement posted = conn.prepareStatement(sql);
+            posted.setString(1, singer.getName());
+            posted.setString(2, singer.getName());
+            posted.setString(3, singer.getCompany());
+            posted.setInt(4, singer.getDob());
             posted.executeUpdate();
         }
         catch(Exception e) {
