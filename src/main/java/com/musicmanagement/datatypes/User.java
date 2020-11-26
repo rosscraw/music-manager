@@ -8,8 +8,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.persistence.Id;
 
-
-@Entity 
+@Entity
 @Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "username"))
 /**
  * Data Structure to represent a User of the system.
@@ -26,9 +25,16 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    public User() {
+    // Currently no different roles.
+    @Column(name = "role")
+    private String role = "ROLE_USER";
 
-    }
+    /**
+     * Default constructor.
+     */
+    public User() {
+    }    
+
     /**
      * Primary constructor.
      *
@@ -82,6 +88,22 @@ public class User {
      */
     public User setPassword(String password) {
         this.password = password;
+        return this;
+    }
+
+    /**
+     * @return the user's role.
+     */
+    public String getRole() {
+        return role;
+    }
+
+    /**
+     * @param role the user's role.
+     * @return this.
+     */
+    public User setRole(String role) {
+        this.role = role;
         return this;
     }
 
