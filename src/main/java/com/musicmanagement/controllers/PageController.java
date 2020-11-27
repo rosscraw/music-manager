@@ -5,6 +5,7 @@ import java.util.List;
 import com.musicmanagement.datatypes.Album;
 import com.musicmanagement.datatypes.Singer;
 import com.musicmanagement.datatypes.User;
+import com.musicmanagement.rest.SingerRestController;
 import com.musicmanagement.services.AlbumService;
 import com.musicmanagement.services.SingerService;
 import com.musicmanagement.services.UserService;
@@ -12,7 +13,9 @@ import com.musicmanagement.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class PageController {
@@ -23,6 +26,9 @@ public class PageController {
     private AlbumService albumService;
     @Autowired
     private SingerService singerService;
+
+    @Autowired
+    private SingerRestController singerRest;
     
     @RequestMapping("/")
     public String home() {
@@ -65,4 +71,19 @@ public class PageController {
         model.addAttribute("singersList", singerList);
         return "singerlist";
     }
+
+    @RequestMapping("/singer-list/new-singer")
+    public String showNewProductPage(Model model) {
+        Singer singer = new Singer();
+        model.addAttribute("singer", singer);
+        
+        return "new-singer";
+    }
+
+    @RequestMapping(value = "/save-singer", method = RequestMethod.POST)
+    public String saveSinger(@ModelAttribute("singer") Singer singer) {
+        singerService.saveSinger(singer);;
+        
+        return "redirect:/";
+}
 }
