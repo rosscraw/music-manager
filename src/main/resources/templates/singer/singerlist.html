@@ -3,34 +3,64 @@
 
 <head>
     <meta charset="utf-8" />
-    <link href="../static/styles.css" th:href="@{/styles.css}" rel="stylesheet" />
     <title>Singer Manager</title>
+    <link href="../static/styles.css" th:href="@{/styles.css}" rel="stylesheet" />
+    
 </head>
 
 <body>
     <ul>
         <li><a href="/">Home</a></li>
-        <li><a href="singer-list">Singers</a></li>
-        <li><a href="album-list">Albums</a></li>
-        <li><a href="user-list">Users</a></li>
+        <li><a href="/singer-list">Singers</a></li>
+        <li><a href="/album-list">Albums</a></li>
+        <li><a href="/user-list">Users</a></li>
     </ul>
     <div align="center">
         <h1>Singer List</h1>
         <a th:href="@{'/singer-list/new-singer'}">Create New Singer</a>
         <br /><br />
+        <form th:action="@{/singer-list/page/1}">
+            <input type="hidden" name="sortField" th:value="${sortField}" />
+            <input type="hidden" name="sortDir" th:value="${sortDir}" />
+
+            Filter: <input type="text" name="search" id="search" size="50" th:value="${search}" required />
+            &nbsp;
+            <input type="submit" value="Search" />
+            &nbsp;
+            <input type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
+        </form>
+        <script type="text/javascript">
+            function clearSearch() {
+                window.location = "[[@{/singer-list}]]";
+            }
+        </script>
+        <br><br>
         <!--Table containing singer information.-->
         <table border="1" cellpadding="10">
             <thead>
                 <tr>
                     <th>
-                        <a class="tableLink" th:href="@{'/singer-list/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir}}">Singer ID</a>
+                        <a class="tableLink"
+                            th:href="@{'/singer-list/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir} + ${search != null ? '&search=' + search : ''}}">Singer
+                            ID</a>
                     </th>
                     <th>
-                        <a th:href="@{'/singer-list/page/' + ${currentPage} + '?sortField=name&sortDir=' + ${reverseSortDir}}">Name</a>
+                        <a class="tableLink"
+                            th:href="@{'/singer-list/page/' + ${currentPage} + '?sortField=name&sortDir=' + ${reverseSortDir} + ${search != null ? '&search=' + search : ''}}">Name</a>
                     </th>
-                    <th>Date of Birth</th>
-                    <th>Sex</th>
-                    <th>Company</th>
+                    <th>
+                        <a class="tableLink"
+                            th:href="@{'/singer-list/page/' + ${currentPage} + '?sortField=dob&sortDir=' + ${reverseSortDir} + ${search != null ? '&search=' + search : ''}}">Date
+                            of Birth (YYYMMDD)</a>
+                    </th>
+                    <th>
+                        <a class="tableLink"
+                            th:href="@{'/singer-list/page/' + ${currentPage} + '?sortField=sex&sortDir=' + ${reverseSortDir} + ${search != null ? '&search=' + search : ''}}">Sex</a>
+                    </th>
+                    <th>
+                        <a class="tableLink"
+                            th:href="@{'/singer-list/page/' + ${currentPage} + '?sortField=company&sortDir=' + ${reverseSortDir} + ${search != null ? '&search=' + search : ''}}">Company</a>
+                    </th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -46,7 +76,7 @@
                         <a th:href="@{'/singer-list/edit-singer/' + ${singer.id}}">Edit</a>
                         &nbsp;&nbsp;&nbsp;
                         <!-- Delete Button-->
-                        <a>Delete</a>
+                        <a th:href="@{'/singer-list/delete/' + ${singer.id}}">Delete</a>
                     </td>
                 </tr>
             </tbody>
@@ -55,18 +85,20 @@
     </div>
     <!-- Page navigation-->
     Total Items: [[${totalItems}]] <br>
-    <a th:if="${currentPage > 1}" th:href="@{'/singer-list/page/1' + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">First</a>
+    <a th:if="${currentPage > 1}"
+        th:href="@{'/singer-list/page/1' + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${search != null ? '&search=' + search : ''}}">First</a>
     <span th:unless="${currentPage > 1}">First</span>
-    <a th:if="${currentPage > 1}" th:href="@{'/singer-list/page/' + ${currentPage - 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Previous</a>
+    <a th:if="${currentPage > 1}"
+        th:href="@{'/singer-list/page/' + ${currentPage - 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${search != null ? '&search=' + search : ''}}">Previous</a>
     <span th:unless="${currentPage > 1}">Previous</span>
     <span th:each="i: ${#numbers.sequence(1, totalPages)}">
-        <a th:if="${currentPage != i}" th:href="@{'/singer-list/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+        <a th:if="${currentPage != i}" th:href="@{'/singer-list/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${search != null ? '&search=' + search : ''}}">[[${i}]]</a>
         <span th:unless="${currentPage != i}">[[${i}]]</span>
         &nbsp;
     </span>
-    <a th:if="${currentPage < totalPages}" th:href="@{'/singer-list/page/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+    <a th:if="${currentPage < totalPages}" th:href="@{'/singer-list/page/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${search != null ? '&search=' + search : ''}}">Next</a>
 <span th:unless="${currentPage < totalPages}">Next</span>
-<a th:if="${currentPage < totalPages}" th:href="@{'/singer-list/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+<a th:if="${currentPage < totalPages}" th:href="@{'/singer-list/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${search != null ? '&search=' + search : ''}}">Last</a>
 <span th:unless="${currentPage < totalPages}">Last</span>
 </body>
 

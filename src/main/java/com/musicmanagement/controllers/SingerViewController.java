@@ -33,10 +33,10 @@ public class SingerViewController {
      * @return the singer list html file to display.
      */
     @RequestMapping("singer-list")
-    public String listSingers(Model model) {
+    public String listSingers(Model model, @Param("search") String search) {
         // List<Singer> singerList = singerService.listAllSingers();
         // model.addAttribute("singersList", singerList);
-        return viewPage(model, 1, "name", "asc");
+        return viewPage(model, search, 1, "name", "asc");
     }
 
     /**
@@ -45,7 +45,7 @@ public class SingerViewController {
      * @return the new singer html file to display.
      */
     @RequestMapping("singer-list/new-singer")
-    public String showNewProductPage(Model model) {
+    public String showNewSingerPage(Model model) {
         Singer singer = new Singer();
         model.addAttribute("singer", singer);
 
@@ -59,7 +59,6 @@ public class SingerViewController {
     @RequestMapping(value = "/save-singer", method = RequestMethod.POST)
     public String saveSinger(@ModelAttribute("singer") Singer singer) {
         singerService.saveSinger(singer);
-        
 
         return "redirect:/singer-list";
     }
@@ -86,10 +85,10 @@ public class SingerViewController {
      * @return singerlist page.
      */
     @RequestMapping("singer-list/page/{pageNum}")
-    public String viewPage(Model model, @PathVariable(name = "pageNum") int pageNum,
+    public String viewPage(Model model, @Param("search") String search, @PathVariable(name = "pageNum") int pageNum,
             @Param("sortField") String sortField, @Param("sortDir") String sortDir) {
 
-        Page<Singer> page = singerService.listAll(pageNum, sortField, sortDir);
+        Page<Singer> page = singerService.listAll(pageNum, sortField, sortDir, search);
 
         List<Singer> listSinger = page.getContent();
 
@@ -101,8 +100,22 @@ public class SingerViewController {
         model.addAttribute("sortDir", sortDir);
         model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
 
+        model.addAttribute("search", search);
+
         model.addAttribute("singersList", listSinger);
 
         return "singer/singerlist";
+    }
+
+    /**
+     * Delete a singer.
+     * 
+     * @param id the singer's id to be deleted.
+     * @return the signer list page.
+     */
+    @RequestMapping("singer-list/delete/{id}")
+    public String deleteProduct(@PathVariable(name = "id") int id) {
+        singerService.deleteSinger(id);
+        return "redirect:/singer-list";
     }
 }
