@@ -45,7 +45,7 @@ public class SingerViewController {
      * @return the new singer html file to display.
      */
     @RequestMapping("singer-list/new-singer")
-    public String showNewProductPage(Model model) {
+    public String showNewSingerPage(Model model) {
         Singer singer = new Singer();
         model.addAttribute("singer", singer);
 
@@ -59,7 +59,6 @@ public class SingerViewController {
     @RequestMapping(value = "/save-singer", method = RequestMethod.POST)
     public String saveSinger(@ModelAttribute("singer") Singer singer) {
         singerService.saveSinger(singer);
-        
 
         return "redirect:/singer-list";
     }
@@ -106,5 +105,17 @@ public class SingerViewController {
         model.addAttribute("singersList", listSinger);
 
         return "singer/singerlist";
+    }
+
+    /**
+     * Delete a singer.
+     * 
+     * @param id the singer's id to be deleted.
+     * @return the signer list page.
+     */
+    @RequestMapping("singer-list/delete/{id}")
+    public String deleteProduct(@PathVariable(name = "id") int id) {
+        singerService.deleteSinger(id);
+        return "redirect:/singer-list";
     }
 }

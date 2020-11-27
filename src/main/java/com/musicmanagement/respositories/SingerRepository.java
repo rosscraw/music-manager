@@ -1,7 +1,5 @@
 package com.musicmanagement.respositories;
 
-import java.util.List;
-
 import com.musicmanagement.datatypes.Singer;
 
 import org.springframework.data.domain.Page;

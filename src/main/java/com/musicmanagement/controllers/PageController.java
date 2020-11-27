@@ -56,12 +56,12 @@ public class PageController {
         return "userlist";
     }
 
-    @RequestMapping("/album-list")
-    public String listAlbums(Model model) {
-        List<Album> albumsList = albumService.listAllAlbums();
-        model.addAttribute("albumsList", albumsList);
-        return "albumlist";
-    }
+    // @RequestMapping("/album-list")
+    // public String listAlbums(Model model) {
+    //     List<Album> albumsList = albumService.listAllAlbums();
+    //     model.addAttribute("albumsList", albumsList);
+    //     return "albumlist";
+    // }
 
 //     @RequestMapping("/singer-list")
 //     public String listSingers(Model model) {

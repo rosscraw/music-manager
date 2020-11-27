@@ -3,35 +3,35 @@
     xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8" />
-<title>Edit Singer</title>
+<title>Edit Album</title>
 </head>
 <body>
     <div align="center">
-        <h1>Edit Singer</h1>
+        <h1>Edit Album</h1>
         <br />
-        <form action="#" th:action="@{/save-singer}" th:object="${singer}"
+        <form action="#" th:action="@{/save-album}" th:object="${album}"
             method="post">
  
             <table border="0" cellpadding="10">
                 <tr>             
-                    <td>Singer ID:</td>
+                    <td>Album ID:</td>
                     <td>
                         <input type="text" th:field="*{id}" readonly="readonly" />
                     </td>
                 </tr>        
                 <tr>             
-                    <td>Singer's Name:</td>
+                    <td>Album's Name:</td>
                     <td>
                         <input type="text" th:field="*{name}" />
                     </td>
                 </tr>
                 <tr>
-                    <td>Date of Birth (YYYMMDD):</td>
-                    <td><input type="text" th:field="*{dob}" /></td>
+                    <td>Singer:</td>
+                    <td><input type="text" th:field="*{singer}" /></td>
                 </tr>
                 <tr>
-                    <td>Sex:</td>
-                    <td><input type="text" th:field="*{sex}" /></td>
+                    <td>Year:</td>
+                    <td><input type="text" th:field="*{year}" /></td>
                 </tr>
                 <tr>
                     <td>Company:</td>

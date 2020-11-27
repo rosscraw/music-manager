@@ -3,8 +3,9 @@
 
 <head>
     <meta charset="utf-8" />
-    <link href="../static/styles.css" th:href="@{/styles.css}" rel="stylesheet" />
     <title>Singer Manager</title>
+    <link href="../static/styles.css" th:href="@{/styles.css}" rel="stylesheet" />
+    
 </head>
 
 <body>
@@ -44,17 +45,21 @@
                             ID</a>
                     </th>
                     <th>
-                        <a
+                        <a class="tableLink"
                             th:href="@{'/singer-list/page/' + ${currentPage} + '?sortField=name&sortDir=' + ${reverseSortDir} + ${search != null ? '&search=' + search : ''}}">Name</a>
                     </th>
                     <th>
-                    <a th:href="@{'/singer-list/page/' + ${currentPage} + '?sortField=dob&sortDir=' + ${reverseSortDir} + ${search != null ? '&search=' + search : ''}}">Date of Birth (YYYMMDD)</a>
+                        <a class="tableLink"
+                            th:href="@{'/singer-list/page/' + ${currentPage} + '?sortField=dob&sortDir=' + ${reverseSortDir} + ${search != null ? '&search=' + search : ''}}">Date
+                            of Birth (YYYMMDD)</a>
                     </th>
                     <th>
-                        <a th:href="@{'/singer-list/page/' + ${currentPage} + '?sortField=sex&sortDir=' + ${reverseSortDir} + ${search != null ? '&search=' + search : ''}}">Sex</a>
+                        <a class="tableLink"
+                            th:href="@{'/singer-list/page/' + ${currentPage} + '?sortField=sex&sortDir=' + ${reverseSortDir} + ${search != null ? '&search=' + search : ''}}">Sex</a>
                     </th>
                     <th>
-                        <a th:href="@{'/singer-list/page/' + ${currentPage} + '?sortField=company&sortDir=' + ${reverseSortDir} + ${search != null ? '&search=' + search : ''}}">Company</a>
+                        <a class="tableLink"
+                            th:href="@{'/singer-list/page/' + ${currentPage} + '?sortField=company&sortDir=' + ${reverseSortDir} + ${search != null ? '&search=' + search : ''}}">Company</a>
                     </th>
                     <th>Actions</th>
                 </tr>
@@ -71,7 +76,7 @@
                         <a th:href="@{'/singer-list/edit-singer/' + ${singer.id}}">Edit</a>
                         &nbsp;&nbsp;&nbsp;
                         <!-- Delete Button-->
-                        <a>Delete</a>
+                        <a th:href="@{'/singer-list/delete/' + ${singer.id}}">Delete</a>
                     </td>
                 </tr>
             </tbody>
