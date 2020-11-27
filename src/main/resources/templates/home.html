@@ -1,35 +1,39 @@
 <!DOCTYPE html>
 <html xmlns="http://www.thymeleaf.org">
-<head lang="en">
-    <title> Music Management</title>
+  <head lang="en">
+    <title>Music Management</title>
     <meta http-equiv="Content-Type" content="text/html; charset-UTF-8" />
-    <link href="../static/styles.css" th:href="@{/styles.css}" rel="stylesheet" />
+    <link
+      href="../static/styles.css"
+      th:href="@{/styles.css}"
+      rel="stylesheet"
+    />
+  </head>
 
-</head>
-
-<body>  
+  <body>
     <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="singer-list">Singers</a></li>
-        <li><a href="album-list">Albums</a></li>
-        <li><a href="user-list">Users</a></li>
-      </ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="singer-list">Singers</a></li>
+      <li><a href="album-list">Albums</a></li>
+      <li><a href="user-list">Users</a></li>
+    </ul>
     <h1 class="textStyle">Music Catalogue Manager</h1>
-    <h3 class = "textStyle" th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h3>        
-</body>
+    <h3 class="textStyle" th:inline="text">
+      Hello [[${#httpServletRequest.remoteUser}]]!
+    </h3>
+  </body>
 
-<form>
-    <label for="search">Search Music Catalogue</label><br>
-    <input type="text" id="search" name="search"><br>
-    <button class = "button" type="button">Search</button><br><br>
-</form>
+  <form>
+    <label for="search">Search Music Catalogue</label><br />
+    <input type="text" id="search" name="search" /><br />
+    <button class="button" type="button">Search</button><br /><br />
+  </form>
 
-<form th:action="@{/insert}" method="post">    
-    <button class = "button" type="submit">Insert New Record</button>
-</form>
-<br><br>
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Sign Out"/><br><br>
-</form>
-
+  <form th:action="@{/insert}" method="post">
+    <button class="button" type="submit">Insert New Record</button>
+  </form>
+  <br /><br />
+  <form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out" /><br /><br />
+  </form>
 </html>

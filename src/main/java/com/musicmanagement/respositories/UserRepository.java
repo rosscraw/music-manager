@@ -1,7 +1,5 @@
 package com.musicmanagement.respositories;
 
-import java.util.Optional;
-
 import com.musicmanagement.datatypes.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -29,7 +29,7 @@ public class AlbumViewController {
 
     /**
      * 
-     * @param model
+     * @param model the model to add attributes to.
      * @return the album list html file to display.
      */
     @RequestMapping("album-list")
@@ -41,7 +41,7 @@ public class AlbumViewController {
 
     /**
      * 
-     * @param model
+     * @param model the model to add attribute to.
      * @return the new album html file to display.
      */
     @RequestMapping("album-list/new-album")
@@ -64,7 +64,6 @@ public class AlbumViewController {
     }
 
     /**
-     * 
      * @param id the album's id.
      * @return edit page for the album.
      */
@@ -78,10 +77,11 @@ public class AlbumViewController {
     }
 
     /**
-     * Page numbering.
+     * Maps the request dependent upon page number and search term.
      * 
-     * @param model
-     * @param pageNum
+     * @param search the search term.
+     * @param model the model to add attributes to.
+     * @param pageNum the page number.
      * @return albumlist page.
      */
     @RequestMapping("album-list/page/{pageNum}")
@@ -108,7 +108,7 @@ public class AlbumViewController {
     }
 
     /**
-     * Delete a album.
+     * Delete an album.
      * 
      * @param id the album's id to be deleted.
      * @return the signer list page.
