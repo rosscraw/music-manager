@@ -52,6 +52,14 @@ public class SingerService {
         singerRepo.deleteById(id);
     }
 
+    /**
+     * Get Singers on current page.
+     * @param pageNum the current page number
+     * @param sortField the current field being sorted
+     * @param sortDir the direction the data is being sorted (ascending or descending)
+     * @param search the current search filter term.
+     * @return Page sublist.
+     */
     public Page<Singer> listAll(int pageNum, String sortField, String sortDir, String search) {
         int pageSize = 5;
          

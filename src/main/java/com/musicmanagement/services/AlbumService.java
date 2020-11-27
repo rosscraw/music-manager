@@ -55,6 +55,14 @@ public class AlbumService {
         albumRepo.deleteById(Id);
     }
 
+    /**
+     * Get Albums on current page.
+     * @param pageNum the current page number
+     * @param sortField the current field being sorted
+     * @param sortDir the direction the data is being sorted (ascending or descending)
+     * @param search the current search filter term.
+     * @return Page sublist.
+     */
     public Page<Album> listAll(int pageNum, String sortField, String sortDir, String search) {
         int pageSize = 5;
          
