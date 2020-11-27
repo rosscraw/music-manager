@@ -27,8 +27,6 @@ public class PageController {
     @Autowired
     private SingerService singerService;
 
-    @Autowired
-    private SingerRestController singerRest;
     
     @RequestMapping("/")
     public String home() {
@@ -65,25 +63,25 @@ public class PageController {
         return "albumlist";
     }
 
-    @RequestMapping("/singer-list")
-    public String listSingers(Model model) {
-        List<Singer> singerList = singerService.listAllSingers();
-        model.addAttribute("singersList", singerList);
-        return "singerlist";
-    }
+//     @RequestMapping("/singer-list")
+//     public String listSingers(Model model) {
+//         List<Singer> singerList = singerService.listAllSingers();
+//         model.addAttribute("singersList", singerList);
+//         return "singerlist";
+//     }
 
-    @RequestMapping("/singer-list/new-singer")
-    public String showNewProductPage(Model model) {
-        Singer singer = new Singer();
-        model.addAttribute("singer", singer);
+//     @RequestMapping("/singer-list/new-singer")
+//     public String showNewProductPage(Model model) {
+//         Singer singer = new Singer();
+//         model.addAttribute("singer", singer);
         
-        return "new-singer";
-    }
+//         return "new-singer";
+//     }
 
-    @RequestMapping(value = "/save-singer", method = RequestMethod.POST)
-    public String saveSinger(@ModelAttribute("singer") Singer singer) {
-        singerService.saveSinger(singer);;
+//     @RequestMapping(value = "/save-singer", method = RequestMethod.POST)
+//     public String saveSinger(@ModelAttribute("singer") Singer singer) {
+//         singerService.saveSinger(singer);;
         
-        return "redirect:/";
-}
+//         return "redirect:/";
+// }
 }

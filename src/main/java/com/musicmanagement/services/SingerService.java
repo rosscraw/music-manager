@@ -6,6 +6,9 @@ import com.musicmanagement.datatypes.Singer;
 import com.musicmanagement.respositories.SingerRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -46,6 +49,14 @@ public class SingerService {
      */
     public void deleteSinger(Integer id) {
         singerRepo.deleteById(id);
+    }
+
+    public Page<Singer> listAll(int pageNum) {
+        int pageSize = 5;
+         
+        Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
+         
+        return singerRepo.findAll(pageable);
     }
     
 }

@@ -92,5 +92,6 @@ public class SingerRestController{
     public void delete(@PathVariable Integer id) {
         singerService.deleteSinger(id);
     }
+    
 
 }
