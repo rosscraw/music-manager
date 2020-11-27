@@ -52,13 +52,17 @@ public class SingerService {
         singerRepo.deleteById(id);
     }
 
-    public Page<Singer> listAll(int pageNum, String sortField, String sortDir) {
+    public Page<Singer> listAll(int pageNum, String sortField, String sortDir, String search) {
         int pageSize = 5;
          
         Pageable pageable = PageRequest.of(pageNum - 1, pageSize,
             sortDir.equals("asc") ? Sort.by(sortField).ascending()
                                               : Sort.by(sortField).descending()
-    );         
+    );
+    if(search !=null) {
+        return singerRepo.findAll(search, pageable);
+        //return singerRepo.search(search, pageable);
+    }         
         return singerRepo.findAll(pageable);
     }
     
