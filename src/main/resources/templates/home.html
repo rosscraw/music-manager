@@ -1,39 +1,35 @@
 <!DOCTYPE html>
 <html xmlns="http://www.thymeleaf.org">
 <head lang="en">
-
     <title> Music Management</title>
     <meta http-equiv="Content-Type" content="text/html; charset-UTF-8" />
+    <link href="../static/styles.css" th:href="@{/styles.css}" rel="stylesheet" />
 
 </head>
-<style>
-    .form {
-    text-align: center;
-    }
-    .button {
-      border: none;
-      color: white;
-      background-color: rgb(0, 0, 66);
-      padding: 15px 32px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-      margin: 4px 2px;
-      cursor: pointer;
-    }
-</style>
-<body>
-    <h1>Music Catalogue Manager</h1>
-    <h3 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h3>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
-        </form>
+
+<body>  
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="singer-list">Singers</a></li>
+        <li><a href="album-list">Albums</a></li>
+        <li><a href="user-list">Users</a></li>
+      </ul>
+    <h1 class="textStyle">Music Catalogue Manager</h1>
+    <h3 class = "textStyle" th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h3>        
 </body>
 
-<form class = "form">
+<form>
     <label for="search">Search Music Catalogue</label><br>
-    <input type="text" id="search" name="dearch"><br><br>
-    <button class = "button" type="button">Search</button>
+    <input type="text" id="search" name="search"><br>
+    <button class = "button" type="button">Search</button><br><br>
 </form>
+
+<form th:action="@{/insert}" method="post">    
+    <button class = "button" type="submit">Insert New Record</button>
+</form>
+<br><br>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/><br><br>
+</form>
+
 </html>
