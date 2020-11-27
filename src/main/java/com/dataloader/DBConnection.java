@@ -144,7 +144,7 @@ private static Connection conn;
             String sql = "INSERT INTO singer(name, sex, company, dob) VALUES (?, ?, ?, ?)";
             PreparedStatement posted = conn.prepareStatement(sql);
             posted.setString(1, singer.getName());
-            posted.setString(2, singer.getName());
+            posted.setString(2, singer.getSex());
             posted.setString(3, singer.getCompany());
             posted.setInt(4, singer.getDob());
             posted.executeUpdate();
