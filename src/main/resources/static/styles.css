@@ -47,6 +47,10 @@ h1,
 h3,
 a {
   font-family: Arial, Helvetica, sans-serif;
+  
+}
+.tableLink{
+  color: rgb(0, 195, 255)
 }
 
 /* Change the link color to #111 (black) on hover */

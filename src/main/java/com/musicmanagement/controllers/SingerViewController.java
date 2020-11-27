@@ -7,6 +7,7 @@ import com.musicmanagement.services.SingerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -35,7 +36,7 @@ public class SingerViewController {
     public String listSingers(Model model) {
         // List<Singer> singerList = singerService.listAllSingers();
         // model.addAttribute("singersList", singerList);
-        return viewPage(model, 1);
+        return viewPage(model, 1, "name", "asc");
     }
 
     /**
@@ -58,7 +59,7 @@ public class SingerViewController {
     @RequestMapping(value = "/save-singer", method = RequestMethod.POST)
     public String saveSinger(@ModelAttribute("singer") Singer singer) {
         singerService.saveSinger(singer);
-        ;
+        
 
         return "redirect:/singer-list";
     }
@@ -73,26 +74,33 @@ public class SingerViewController {
         ModelAndView mav = new ModelAndView("singer/edit-singer");
         Singer singer = singerService.getSinger(id);
         mav.addObject("singer", singer);
-         
+
         return mav;
     }
 
     /**
      * Page numbering.
+     * 
      * @param model
      * @param pageNum
      * @return singerlist page.
      */
     @RequestMapping("singer-list/page/{pageNum}")
-    public String viewPage(Model model, @PathVariable(name = "pageNum") int pageNum) {
+    public String viewPage(Model model, @PathVariable(name = "pageNum") int pageNum,
+            @Param("sortField") String sortField, @Param("sortDir") String sortDir) {
 
-        Page<Singer> page = singerService.listAll(pageNum);
+        Page<Singer> page = singerService.listAll(pageNum, sortField, sortDir);
 
         List<Singer> listSinger = page.getContent();
 
         model.addAttribute("currentPage", pageNum);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("totalItems", page.getTotalElements());
+
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+
         model.addAttribute("singersList", listSinger);
 
         return "singer/singerlist";
