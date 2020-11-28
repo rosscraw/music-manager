@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class PageController {
 
-    @Autowired
-    private UserService userService;
+    // @Autowired
+    // private UserService userService;
 
     /**     
      * @return home html page.
@@ -50,10 +50,10 @@ public class PageController {
         return "insert";
     }
 
-    @RequestMapping("/user-list")
-    public String listUsers(Model model) {
-        List<User> usersList = userService.listAllUsers();
-        model.addAttribute("usersList", usersList);
-        return "userlist";
-    }
+    // @RequestMapping("/user-list")
+    // public String listUsers(Model model) {
+    //     List<User> usersList = userService.listAllUsers();
+    //     model.addAttribute("usersList", usersList);
+    //     return "userlist";
+    // }
 }
