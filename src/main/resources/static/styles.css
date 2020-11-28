@@ -82,3 +82,10 @@ th,
 td {
   border-bottom: 1px solid #ddd;
 }
+
+.centreDiv{
+  align-content: center;
+  align-self: center;
+  align-items: center;
+  text-align: center;
+}

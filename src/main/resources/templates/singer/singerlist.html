@@ -21,7 +21,7 @@
       <h1>Singer List</h1>
       <!-- Create signer link-->
       <a th:href="@{'/singer-list/new-singer'}">Create New Singer</a>
-      <br /><br />
+      <br/><br />
       <!--Filter search results.-->
       <form th:action="@{/singer-list/page/1}">
         <input type="hidden" name="sortField" th:value="${sortField}" />
@@ -113,8 +113,9 @@
           </tr>
         </tbody>
       </table>
-      <br /><br />
+      <br/><br />
     </div>
+    <div class="centreDiv">
     <!-- Page navigation-->
     Total Items: [[${totalItems}]] <br />
     <a
@@ -150,5 +151,6 @@
       >Last</a
     >
     <span th:unless="${currentPage < totalPages}">Last</span>
+    </div>
   </body>
 </html>

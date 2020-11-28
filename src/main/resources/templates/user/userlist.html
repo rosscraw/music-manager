@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <title>User Manager</title>
+    <link
+      href="../static/styles.css"
+      th:href="@{/styles.css}"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/singer-list">Singers</a></li>
+      <li><a href="/album-list">Albums</a></li>
+      <li><a href="/user-list">Users</a></li>
+    </ul>
+    <div align="center">
+      <h1>User List</h1>
+      <a th:href="@{'/user-list/new-user'}">Create New User</a>
+      <br/><br />
+      <!--Filter search results.-->
+      <form th:action="@{/user-list/page/1}">
+        <input type="hidden" name="sortField" th:value="${sortField}" />
+        <input type="hidden" name="sortDir" th:value="${sortDir}" />
+
+        Filter:
+        <input
+          type="text"
+          name="search"
+          id="search"
+          size="50"
+          th:value="${search}"
+          required
+        />
+        &nbsp;
+        <input type="submit" value="Search" />
+        &nbsp;
+        <input
+          type="button"
+          value="Clear"
+          id="btnClear"
+          onclick="clearSearch()"
+        />
+      </form>
+      <script type="text/javascript">
+        function clearSearch() {
+          window.location = "[[@{/user-list}]]";
+        }
+      </script>
+      <br /><br />
+      <table border="1" cellpadding="10">
+        <thead>
+          <tr>
+            <th>
+              <a
+                class="tableLink"
+                th:href="@{'/user-list/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir} + ${search != null ? '&search=' + search : ''}}"
+                >User ID</a
+              >
+            </th>
+            <th>
+              <a
+                class="tableLink"
+                th:href="@{'/user-list/page/' + ${currentPage} + '?sortField=username&sortDir=' + ${reverseSortDir} + ${search != null ? '&search=' + search : ''}}"
+                >Username</a
+              >
+            </th>
+            <th>
+              <a
+                class="tableLink"
+                th:href="@{'/user-list/page/' + ${currentPage} + '?sortField=role&sortDir=' + ${reverseSortDir} + ${search != null ? '&search=' + search : ''}}"
+                >Role</a
+              >
+            </th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="user : ${usersList}">
+            <td th:text="${user.id}">User ID</td>
+            <td th:text="${user.username}">Username</td>
+            <td th:text="${user.role}">Role</td>
+            <td>
+              <!-- Edit Button-->
+              <a th:href="@{'/user-list/edit-user/' + ${user.id}}"
+                >Edit</a
+              >
+              &nbsp;&nbsp;&nbsp;
+              <!-- Delete Button-->
+              <a th:href="@{'/user-list/delete/' + ${user.id}}">Delete</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="centreDiv">
+    <!-- Page navigation-->
+    Total Items: [[${totalItems}]] <br />
+    <a
+      th:if="${currentPage > 1}"
+      th:href="@{'/user-list/page/1' + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${search != null ? '&search=' + search : ''}}"
+      >First</a
+    >
+    <span th:unless="${currentPage > 1}">First</span>
+    <a
+      th:if="${currentPage > 1}"
+      th:href="@{'/user-list/page/' + ${currentPage - 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${search != null ? '&search=' + search : ''}}"
+      >Previous</a
+    >
+    <span th:unless="${currentPage > 1}">Previous</span>
+    <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+      <a
+        th:if="${currentPage != i}"
+        th:href="@{'/user-list/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${search != null ? '&search=' + search : ''}}"
+        >[[${i}]]</a
+      >
+      <span th:unless="${currentPage != i}">[[${i}]]</span>
+      &nbsp;
+    </span>
+    <a
+      th:if="${currentPage < totalPages}"
+      th:href="@{'/user-list/page/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${search != null ? '&search=' + search : ''}}"
+      >Next</a
+    >
+    <span th:unless="${currentPage < totalPages}">Next</span>
+    <a
+      th:if="${currentPage < totalPages}"
+      th:href="@{'/user-list/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${search != null ? '&search=' + search : ''}}"
+      >Last</a
+    >
+    <span th:unless="${currentPage < totalPages}">Last</span>
+    </div> 
+  </body>
+</html>
