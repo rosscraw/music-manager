@@ -1,11 +1,5 @@
 package com.musicmanagement.controllers;
 
-import java.util.List;
-
-import com.musicmanagement.datatypes.User;
-import com.musicmanagement.services.UserService;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,18 +36,6 @@ public class PageController {
     public String loginError(Model model) {
         model.addAttribute("loginError", true);
         return "login";
-    }
-
+    }   
     
-    @RequestMapping("/insert")
-    public String insert() {
-        return "insert";
-    }
-
-    // @RequestMapping("/user-list")
-    // public String listUsers(Model model) {
-    //     List<User> usersList = userService.listAllUsers();
-    //     model.addAttribute("usersList", usersList);
-    //     return "userlist";
-    // }
 }

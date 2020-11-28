@@ -24,6 +24,11 @@ import org.springframework.web.bind.annotation.RestController;
  * A REST controller for managing the users via the user service.
  */
 public class UserRestController{
+
+    public static void main(String[] args) {
+        UserRestController userRestController = new UserRestController();
+        System.out.println(userRestController.list().toString());
+    }
     
     @Autowired
     private UserService userService;
