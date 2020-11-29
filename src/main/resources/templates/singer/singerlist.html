@@ -73,8 +73,8 @@
             <th>
               <a
                 class="tableLink"
-                th:href="@{'/singer-list/page/' + ${currentPage} + '?sortField=dob&sortDir=' + ${reverseSortDir} + ${search != null ? '&search=' + search : ''}}"
-                >Date of Birth (YYYMMDD)</a
+                th:href="@{'/singer-list/page/' + ${currentPage} + '?sortField=date&sortDir=' + ${reverseSortDir} + ${search != null ? '&search=' + search : ''}}"
+                >Date of Birth</a
               >
             </th>
             <th>
@@ -98,7 +98,7 @@
           <tr th:each="singer : ${singersList}">
             <td th:text="${singer.id}">Singer ID</td>
             <td th:text="${singer.name}">Name</td>
-            <td th:text="${singer.dob}">Date of Birth</td>
+            <td th:text="${singer.date}">Date of Birth</td>
             <td th:text="${singer.sex}">Sex</td>
             <td th:text="${singer.company}">Company</td>
             <td>

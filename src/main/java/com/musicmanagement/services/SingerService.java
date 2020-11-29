@@ -69,7 +69,6 @@ public class SingerService {
     );
     if(search !=null) {
         return singerRepo.findAll(search, pageable);
-        //return singerRepo.search(search, pageable);
     }         
         return singerRepo.findAll(pageable);
     }
