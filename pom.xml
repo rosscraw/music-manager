@@ -11,8 +11,9 @@
 	<groupId>com.musicmanagement.rosscrawford</groupId>
 	<artifactId>musicmanagement</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<name>musicmanagement</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Music Management App</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -96,5 +97,6 @@
 			</plugin>
 		</plugins>
 	</build>
+	
 
 </project>

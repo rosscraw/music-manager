@@ -1,6 +1,7 @@
 package com.dataloader;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -64,6 +65,7 @@ private static Connection conn;
                             " dob int," +
                             " sex varchar(255)," +
                             " company varchar(255)," +
+                            " date date," +
                             " PRIMARY KEY (id)," +
                             " UNIQUE (name))"
             );
@@ -141,12 +143,13 @@ private static Connection conn;
     public static void addSinger(Singer singer) throws Exception {            
         try{
             Connection conn = getDBConnection();
-            String sql = "INSERT INTO singer(name, sex, company, dob) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO singer(name, sex, company, dob, date) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement posted = conn.prepareStatement(sql);
             posted.setString(1, singer.getName());
             posted.setString(2, singer.getSex());
             posted.setString(3, singer.getCompany());
             posted.setInt(4, singer.getDob());
+            posted.setDate(5, new Date(singer.getDate().getTime()));
             posted.executeUpdate();
         }
         catch(Exception e) {

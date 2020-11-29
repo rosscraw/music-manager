@@ -1,5 +1,6 @@
 package com.musicmanagement.controllers;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.musicmanagement.datatypes.Singer;
@@ -26,6 +27,7 @@ public class SingerViewController {
 
     @Autowired
     private SingerService singerService;
+    
 
     /**
      * 
@@ -58,6 +60,11 @@ public class SingerViewController {
      */
     @RequestMapping(value = "/save-singer", method = RequestMethod.POST)
     public String saveSinger(@ModelAttribute("singer") Singer singer) {
+        int dob = singer.getDob();
+        int year = dob / 10000 - 1900;
+        int month = (dob % 10000) / 100 - 1;
+        int day = dob % 100;
+        singer.setDate(new Date(year, month, day));
         singerService.saveSinger(singer);
 
         return "redirect:/singer-list";

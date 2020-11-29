@@ -1,6 +1,9 @@
 package com.dataloader;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Scanner;
 import com.musicmanagement.datatypes.Album;
 import com.musicmanagement.datatypes.Singer;
