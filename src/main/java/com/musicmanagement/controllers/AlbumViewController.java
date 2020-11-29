@@ -1,9 +1,13 @@
 package com.musicmanagement.controllers;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import com.musicmanagement.datatypes.Album;
+import com.musicmanagement.datatypes.Singer;
 import com.musicmanagement.services.AlbumService;
+import com.musicmanagement.services.SingerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,13 +23,25 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 /**
  * Controller to handle views relating to the Album Page. Includes viewing a
- * table of albums, being able to add a new album, updating a album's
- * details.
+ * table of albums, being able to add a new album, updating a album's details.
  */
 public class AlbumViewController {
 
     @Autowired
     private AlbumService albumService;
+
+    @Autowired
+    private SingerService singerService;
+
+    public static List<Integer> yearRange(int i, int j) {
+        int cur = i;
+        int stop = j;
+        List<Integer> list = new ArrayList<Integer>();
+        while (cur <= stop) {
+            list.add(cur++);
+        }
+        return list;
+    }
 
     /**
      * 
@@ -46,8 +62,13 @@ public class AlbumViewController {
      */
     @RequestMapping("album-list/new-album")
     public String showNewAlbumPage(Model model) {
+        List<Integer> years = yearRange(1950, 2020);
+        List<Singer> singers = singerService.listAllSingers();
+        singers.sort(Comparator.comparing(Singer::getName));
         Album album = new Album();
         model.addAttribute("album", album);
+        model.addAttribute("singers", singers);
+        model.addAttribute("years", years);
 
         return "album/new-album";
     }
@@ -58,6 +79,8 @@ public class AlbumViewController {
      */
     @RequestMapping(value = "/save-album", method = RequestMethod.POST)
     public String saveAlbum(@ModelAttribute("album") Album album) {
+        album.setCompany(album.getCompany().trim().toUpperCase()).setName(album.getName().trim().toUpperCase())
+                .setSinger(album.getSinger().trim().toUpperCase());
         albumService.saveAlbum(album);
 
         return "redirect:/album-list";
@@ -69,9 +92,14 @@ public class AlbumViewController {
      */
     @RequestMapping("album-list/edit-album/{id}")
     public ModelAndView editAlbum(@PathVariable(name = "id") int id) {
+        List<Integer> years = yearRange(1950, 2020);
+        List<Singer> singers = singerService.listAllSingers();
+        singers.sort(Comparator.comparing(Singer::getName));
         ModelAndView mav = new ModelAndView("album/edit-album");
         Album album = albumService.getAlbum(id);
         mav.addObject("album", album);
+        mav.addObject("singers", singers);
+        mav.addObject("years", years);
 
         return mav;
     }
@@ -79,8 +107,8 @@ public class AlbumViewController {
     /**
      * Maps the request dependent upon page number and search term.
      * 
-     * @param search the search term.
-     * @param model the model to add attributes to.
+     * @param search  the search term.
+     * @param model   the model to add attributes to.
      * @param pageNum the page number.
      * @return albumlist page.
      */

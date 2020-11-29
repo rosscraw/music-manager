@@ -79,7 +79,8 @@ private static Connection conn;
                             " singer varchar(255)," +
                             " company varchar(255)," +
                             " PRIMARY KEY (id)," +
-                            " UNIQUE (title))"
+                            " UNIQUE (title)," +
+                            " FOREIGN KEY (singer) REFERENCES Singer(name) ON DELETE CASCADE)"
             );
             createAlbumTable.executeUpdate();
         }

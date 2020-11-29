@@ -27,7 +27,6 @@ public class SingerViewController {
 
     @Autowired
     private SingerService singerService;
-    
 
     /**
      * 
@@ -60,11 +59,16 @@ public class SingerViewController {
      */
     @RequestMapping(value = "/save-singer", method = RequestMethod.POST)
     public String saveSinger(@ModelAttribute("singer") Singer singer) {
-        int dob = singer.getDob();
-        int year = dob / 10000 - 1900;
-        int month = (dob % 10000) / 100 - 1;
-        int day = dob % 100;
-        singer.setDate(new Date(year, month, day));
+        singer.setCompany(singer.getCompany().trim().toUpperCase()).setName(singer.getName().trim().toUpperCase())
+                .setSex(singer.getSex().trim().toUpperCase());
+
+        // int dob = singer.getDob();
+        // int year = dob / 10000 - 1900;
+        // int month = (dob % 10000) / 100 - 1;
+        // int day = dob % 100;
+        // singer.setDate(new Date(year, month, day));
+        int dob = 19 * 1000000 + singer.getDate().getYear() * 10000 + (singer.getDate().getMonth() + 1) * 100 + singer.getDate().getDate();
+        singer.setDob(dob);
         singerService.saveSinger(singer);
 
         return "redirect:/singer-list";
@@ -79,6 +83,8 @@ public class SingerViewController {
     public ModelAndView editSinger(@PathVariable(name = "id") int id) {
         ModelAndView mav = new ModelAndView("singer/edit-singer");
         Singer singer = singerService.getSinger(id);
+        int dob = 19 * 1000000 + singer.getDate().getYear() * 10000 + (singer.getDate().getMonth() + 1) * 100 + singer.getDate().getDate();
+        singer.setDob(dob);
         mav.addObject("singer", singer);
 
         return mav;

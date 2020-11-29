@@ -7,6 +7,7 @@
   <body>
     <div align="center">
       <h1>Add New Album</h1>
+      <h3>Please note currently albums can only be created if the signer already exists in the sytem.</h3>
       <br />
       <form
         action="#"
@@ -21,11 +22,35 @@
           </tr>
           <tr>
             <td>Singer:</td>
-            <td><input type="text" th:field="*{singer}" /></td>
+            <td>
+              <select th:field="*{singer}">
+                <option th:each="singer : ${singers}"
+                    th:value="${singer.name}"
+                    th:text="${singer.name}">
+                </option>
+            </select>
+         </td>
+         <td colspan="2"><input
+          type="button"
+          value="Add Singer"
+          id="btnClear"
+          onclick="addSinger()"
+        /></td>
+      </tr>
+      <script type="text/javascript">
+        function addSinger() {
+          window.location = "[[@{/singer-list/new-singer}]]";
+        }
+      </script>
           </tr>
           <tr>
             <td>Year:</td>
-            <td><input type="text" th:field="*{year}" /></td>
+            <td><select th:field="*{year}">
+              <option th:each="year : ${years}"
+                  th:value="${year}"
+                  th:text="${year}">
+              </option>
+          </select></td>
           </tr>
           <tr>
             <td>Company:</td>
@@ -33,7 +58,18 @@
           </tr>
           <tr>
             <td colspan="2"><button type="submit">Save</button></td>
+            <td colspan="2"><input
+              type="button"
+              value="Cancel"
+              id="btnClear"
+              onclick="cancel()"
+            /></td>
           </tr>
+          <script type="text/javascript">
+            function cancel() {
+              window.location = "[[@{/album-list}]]";
+            }
+          </script>
         </table>
       </form>
     </div>
