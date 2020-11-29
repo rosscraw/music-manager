@@ -21,11 +21,23 @@
           </tr>
           <tr>
             <td>Singer:</td>
-            <td><input type="text" th:field="*{singer}" /></td>
+            <td>
+              <select th:field="*{singer}">
+                <option th:each="singer : ${singers}"
+                    th:value="${singer.name}"
+                    th:text="${singer.name}">
+                </option>
+            </select>
+         </td>
           </tr>
           <tr>
             <td>Year:</td>
-            <td><input type="text" th:field="*{year}" /></td>
+            <td><select th:field="*{year}">
+              <option th:each="year : ${years}"
+                  th:value="${year}"
+                  th:text="${year}">
+              </option>
+          </select></td>
           </tr>
           <tr>
             <td>Company:</td>

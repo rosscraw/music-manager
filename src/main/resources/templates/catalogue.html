@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <title>Singer Manager</title>
+    <link
+      href="../static/styles.css"
+      th:href="@{/styles.css}"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/singer-list">Singers</a></li>
+      <li><a href="/album-list">Albums</a></li>
+      <li><a href="/user-list">Users</a></li>
+    </ul>
+    <div align="center">
+      <h1>Catalogue Search</h1>
+      <!-- Create signer link-->
+      <!--a th:href="@{'/singer-list/new-singer'}">Create New Singer<!/a>
+      <br/><br />
+      <!--Filter search results.-->
+      <form th:action="@{/catalogue/page/1}">
+        Filter:
+        <input
+          type="text"
+          name="search"
+          id="search"
+          size="50"
+          th:value="beans"
+          required
+        />
+        &nbsp;
+        <input type="submit" value="Search" />
+        &nbsp;
+        <input
+          type="button"
+          value="Clear"
+          id="btnClear"
+          onclick="clearSearch()"
+        />
+      </form>
+      <script type="text/javascript">
+        function clearSearch() {
+          window.location = "[[@{/catalogue}]]";
+        }
+      </script>
+      <br /><br />
+      <!--Table containing singer information.-->
+      
+      <br/><br />
+    </div>
+    
+  </body>
+</html>
