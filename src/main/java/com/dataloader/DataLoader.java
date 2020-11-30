@@ -12,24 +12,25 @@ import com.musicmanagement.datatypes.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
- * Data type to sort through a text file and update database.
- * Contains the driver to insert the data into MySQL database.
+ * Data type to sort through a text file and update database. Contains the
+ * driver to insert the data into MySQL database.
  */
 public class DataLoader {
-    
 
     public static void main(String[] args) throws Exception {
-        
-        DataLoader dataL = new DataLoader();
-        DBConnection.createTables();
-        File file = new File("data\\ng_music_data.txt");
-        dataL.separateDataFromTextFile(file);
+
+        // DataLoader dataL = new DataLoader();
+        // DBConnection.createTables();
+        // File file = new File("data\\ng_music_data.txt");
+        // dataL.separateDataFromTextFile(file);
     }
 
     /**
-     * Separated the rows in a text file and creates an object depending on its type.
+     * Separated the rows in a text file and creates an object depending on its
+     * type.
      * 
-     * @param file the file containing artist, singer and user records to be separated and parsed.
+     * @param file the file containing artist, singer and user records to be
+     *             separated and parsed.
      * @throws Exception
      */
     public void separateDataFromTextFile(File file) throws Exception {
@@ -72,7 +73,7 @@ public class DataLoader {
 
         User user = new User(username);
         user.setPassword(encode.encode(password));
-        
+
         DBConnection.addUser(user);
     }
 
@@ -87,7 +88,7 @@ public class DataLoader {
 
         String singer = params[1].trim();
         String title = params[2].trim();
-        int year = Integer.parseInt(params[3].trim());        
+        int year = Integer.parseInt(params[3].trim());
         String company = params[4].trim();
 
         Album album = new Album(title, company, year, singer);

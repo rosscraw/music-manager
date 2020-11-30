@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 /**
- * The Album service that will handle the CRUD operations.
+ * The Album service that will handle the Album CRUD operations.
  */
 public class AlbumService {
 
@@ -76,5 +76,7 @@ public class AlbumService {
     }         
         return albumRepo.findAll(pageable);
     }
+
+    
 
 }

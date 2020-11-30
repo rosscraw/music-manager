@@ -33,18 +33,22 @@ public class AlbumViewController {
     @Autowired
     private SingerService singerService;
 
-    public static List<Integer> yearRange(int i, int j) {
-        int cur = i;
-        int stop = j;
+    /**
+     * Method to set a year range for dropdown year selection
+     * 
+     * @param earliest the earliest year in the drop down
+     * @param latest the latest year in the drop down
+     * @return list of years for dropdown selection
+     */
+    public static List<Integer> yearRange(int earliest, int latest) {
         List<Integer> list = new ArrayList<Integer>();
-        while (cur <= stop) {
-            list.add(cur++);
+        while (earliest <= latest) {
+            list.add(latest++);
         }
         return list;
     }
 
     /**
-     * 
      * @param model the model to add attributes to.
      * @return the album list html file to display.
      */
@@ -56,7 +60,6 @@ public class AlbumViewController {
     }
 
     /**
-     * 
      * @param model the model to add attribute to.
      * @return the new album html file to display.
      */

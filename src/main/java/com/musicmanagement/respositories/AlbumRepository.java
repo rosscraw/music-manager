@@ -19,4 +19,11 @@ public interface AlbumRepository extends JpaRepository<Album, Integer> {
             + " OR a.company LIKE %?1%"
             + " OR CONCAT(a.year, '') LIKE %?1%")
     public Page<Album> findAll(String keyword, Pageable pageable);
+
+    
+    // @Query("SELECT a FROM Album a"
+    //         + " INNER JOIN Singer s"
+    //         + " ON a.singer = s.name")
+    // public Page<Album> findAllJoin(Pageable pageable);
+    
 }

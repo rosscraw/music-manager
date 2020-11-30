@@ -67,6 +67,7 @@ public class Singer implements Manageable {
      * @param sex     the singer's sex..
      * @throws ParseException
      */
+    @SuppressWarnings("deprecation")
     public Singer(String name, String company, int dob, String sex) {
         this.name = name;
         this.company = company;
@@ -95,10 +96,17 @@ public class Singer implements Manageable {
         return this;
     }
 
+    /**
+     * @return the date of birth in date format.
+     */
     public Date getDate() {
         return date;
     }
 
+    /**
+     * @param date the date of birth in date format.
+     * @return this.
+     */
     public Singer setDate(Date date) {
         this.date = date;
         return this;

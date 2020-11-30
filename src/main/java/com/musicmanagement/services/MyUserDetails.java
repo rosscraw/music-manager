@@ -10,7 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**
- * 
+ * Details of user to allow for use with security to log them in.
  */
 public class MyUserDetails implements UserDetails {
 
