@@ -43,7 +43,7 @@ public class AlbumViewController {
     public static List<Integer> yearRange(int earliest, int latest) {
         List<Integer> list = new ArrayList<Integer>();
         while (earliest <= latest) {
-            list.add(latest++);
+            list.add(earliest++);
         }
         return list;
     }
