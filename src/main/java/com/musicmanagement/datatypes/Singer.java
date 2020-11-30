@@ -2,8 +2,6 @@ package com.musicmanagement.datatypes;
 
 import java.sql.Date;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
