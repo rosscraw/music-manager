@@ -19,3 +19,5 @@ At the top of the project run an install to download the relevant dependencies a
 
 At the top of the project start spring boot which will run at http://localhost:8080/
 <b><i>./mvnw spring-boot:run</b></i>
+
+You will then be shown a login screen and can log in using one of the username and password combinations that was present in the data text file.
