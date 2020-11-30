@@ -29,6 +29,7 @@ public class SingerViewController {
     private SingerService singerService;
 
     /**
+     * List all singer's containing the search term somewhere in their fields.
      * 
      * @param model
      * @return the singer list html file to display.
@@ -41,6 +42,7 @@ public class SingerViewController {
     }
 
     /**
+     * Allows for addition of new singer to database.
      * 
      * @param model
      * @return the new singer html file to display.
@@ -54,20 +56,21 @@ public class SingerViewController {
     }
 
     /**
+     * Save a singer object to the database.
+     * 
      * @param singer the singer to add to the database
      * @return the singer list html page to display.
      */
+    @SuppressWarnings("deprecation")
     @RequestMapping(value = "/save-singer", method = RequestMethod.POST)
     public String saveSinger(@ModelAttribute("singer") Singer singer) {
+        // Capitalise all the input data for storage.
         singer.setCompany(singer.getCompany().trim().toUpperCase()).setName(singer.getName().trim().toUpperCase())
                 .setSex(singer.getSex().trim().toUpperCase());
 
-        // int dob = singer.getDob();
-        // int year = dob / 10000 - 1900;
-        // int month = (dob % 10000) / 100 - 1;
-        // int day = dob % 100;
-        // singer.setDate(new Date(year, month, day));
-        int dob = 19 * 1000000 + singer.getDate().getYear() * 10000 + (singer.getDate().getMonth() + 1) * 100 + singer.getDate().getDate();
+        // Get dob int value from Date.
+        int dob = 19 * 1000000 + singer.getDate().getYear() * 10000 + (singer.getDate().getMonth() + 1) * 100
+                + singer.getDate().getDate();
         singer.setDob(dob);
         singerService.saveSinger(singer);
 
@@ -75,26 +78,33 @@ public class SingerViewController {
     }
 
     /**
+     * Edit the singer's information, update html page to display currently stored
+     * values.
      * 
      * @param id the singer's id.
      * @return edit page for the singer.
      */
+    @SuppressWarnings("deprecation")
     @RequestMapping("singer-list/edit-singer/{id}")
     public ModelAndView editSinger(@PathVariable(name = "id") int id) {
         ModelAndView mav = new ModelAndView("singer/edit-singer");
         Singer singer = singerService.getSinger(id);
-        int dob = 19 * 1000000 + singer.getDate().getYear() * 10000 + (singer.getDate().getMonth() + 1) * 100 + singer.getDate().getDate();
+
+        // Get dob int value from Date.
+        int dob = 19 * 1000000 + singer.getDate().getYear() * 10000 + (singer.getDate().getMonth() + 1) * 100
+                + singer.getDate().getDate();
         singer.setDob(dob);
+
         mav.addObject("singer", singer);
 
         return mav;
     }
 
     /**
-     * Page numbering.
+     * Allow for pagenation and searching of the singer's list.
      * 
      * @param model
-     * @param pageNum
+     * @param pageNum the current page number.
      * @return singerlist page.
      */
     @RequestMapping("singer-list/page/{pageNum}")

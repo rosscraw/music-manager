@@ -18,9 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class CatalogueViewController {
-
-    
+public class CatalogueViewController {    
     
     @RequestMapping("/catalogue")
     public String catalogue() {

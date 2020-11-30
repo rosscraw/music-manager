@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 /**
- * The Singer service that will handle the CRUD operations.
+ * The Singer service that will handle the Singer CRUD operations.
  */
 public class SingerService {
 

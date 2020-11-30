@@ -57,13 +57,6 @@
             <th>
               <a
                 class="tableLink"
-                th:href="@{'/user-list/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir} + ${search != null ? '&search=' + search : ''}}"
-                >User ID</a
-              >
-            </th>
-            <th>
-              <a
-                class="tableLink"
                 th:href="@{'/user-list/page/' + ${currentPage} + '?sortField=username&sortDir=' + ${reverseSortDir} + ${search != null ? '&search=' + search : ''}}"
                 >Username</a
               >
@@ -80,7 +73,6 @@
         </thead>
         <tbody>
           <tr th:each="user : ${usersList}">
-            <td th:text="${user.id}">User ID</td>
             <td th:text="${user.username}">Username</td>
             <td th:text="${user.role}">Role</td>
             <td>

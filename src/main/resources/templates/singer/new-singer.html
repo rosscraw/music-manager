@@ -3,8 +3,19 @@
   <head>
     <meta charset="utf-8" />
     <title>Create New Singer</title>
+    <link
+      href="../static/styles.css"
+      th:href="@{/styles.css}"
+      rel="stylesheet"
+    />
   </head>
   <body>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/singer-list">Singers</a></li>
+      <li><a href="/album-list">Albums</a></li>
+      <li><a href="/user-list">Users</a></li>
+    </ul>
     <div align="center">
       <h1>Add New Singer</h1>
       <br />
@@ -33,12 +44,14 @@
           </tr>
           <tr>
             <td colspan="2"><button type="submit">Save</button></td>
-            <td colspan="2"><input
-              type="button"
-              value="Cancel"
-              id="btnClear"
-              onclick="cancel()"
-            /></td>
+            <td colspan="2">
+              <input
+                type="button"
+                value="Cancel"
+                id="btnClear"
+                onclick="cancel()"
+              />
+            </td>
           </tr>
           <script type="text/javascript">
             function cancel() {

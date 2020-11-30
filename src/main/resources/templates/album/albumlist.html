@@ -56,13 +56,6 @@
             <th>
               <a
                 class="tableLink"
-                th:href="@{'/album-list/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir} + ${search != null ? '&search=' + search : ''}}"
-                >Album ID</a
-              >
-            </th>
-            <th>
-              <a
-                class="tableLink"
                 th:href="@{'/album-list/page/' + ${currentPage} + '?sortField=title&sortDir=' + ${reverseSortDir} + ${search != null ? '&search=' + search : ''}}"
                 >Title</a
               >
@@ -93,7 +86,6 @@
         </thead>
         <tbody>
           <tr th:each="album : ${albumsList}">
-            <td th:text="${album.id}">Album ID</td>
             <td th:text="${album.name}">Title</td>
             <td th:text="${album.singer}">Singer</td>
             <td th:text="${album.year}">Year</td>

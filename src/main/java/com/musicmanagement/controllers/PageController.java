@@ -37,9 +37,5 @@ public class PageController {
         model.addAttribute("loginError", true);
         return "login";
     }   
-
-    // @RequestMapping("/catalogue")
-    // public String catalogue() {
-    //     return "catalogue";
-    // }    
 }
+

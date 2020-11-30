@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 /**
- * The User service that will handle the CRUD operations.
+ * The User service that will handle the User CRUD operations.
  */
 public class UserService {
 
