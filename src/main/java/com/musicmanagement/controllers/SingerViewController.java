@@ -1,6 +1,5 @@
 package com.musicmanagement.controllers;
 
-import java.sql.Date;
 import java.util.List;
 
 import com.musicmanagement.datatypes.Singer;
