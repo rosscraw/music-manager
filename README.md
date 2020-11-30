@@ -4,10 +4,10 @@
 
 ### Step1 - MySQL Database Setup
 
-*Start a MySQL server on <b>localhost:3306</b>
-*Create a Schema named <b>"music_manager"</b>
-*Update the password in <b>"src\main\resources\application.properties"</b> and <b>"src\main\java\com\dataloader\DBConnection.java"</b>.
-*Data should be inserted once Spring Boot Application is run.
+* Start a MySQL server on <b>localhost:3306</b>
+* Create a Schema named <b>"music_manager"</b>
+* Update the password in <b>"src\main\resources\application.properties"</b> and <b>"src\main\java\com\dataloader\DBConnection.java"</b>.
+* Data should be inserted once Spring Boot Application is run.
 
 ### Step2 - Install
 
